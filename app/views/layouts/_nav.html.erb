@@ -11,12 +11,7 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Features</a>
       </li>
-      <li class="nav-item">
-        <li class="nav-link"><%= link_to 'sign in', new_user_session_path %></li>
-      </li>
-      <li class="nav-item">
-        <li class="nav-link"> <%= link_to 'sign up' , new_user_registration_path%> </li>
-      </li>
+
         <% if current_user%>
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,6 +21,13 @@
           <a class="dropdown-item" >  <%= link_to('Logout', destroy_user_session_path, method: :delete) %> </a>
           <a class="dropdown-item"><%= link_to 'profile',profile_path(current_user.id)%> </a>
         </div>
+      </li>
+      <% else %>
+      <li class="nav-item">
+        <li class="nav-link"><%= link_to 'sign in', new_user_session_path %></li>
+      </li>
+      <li class="nav-item">
+        <li class="nav-link"> <%= link_to 'sign up' , new_user_registration_path%> </li>
       </li>
       <%end%>
       <li class="nav-item">

@@ -19,5 +19,6 @@
   <p>
     <%= @event.description %>
   </p>
+  <%= link_to "rejoindre l'evenement", new_event_participant_path(@event.id)%>
   <hr>
 </div>
