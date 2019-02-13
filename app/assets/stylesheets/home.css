@@ -1,0 +1,10 @@
+
+.carousel-item{
+  height: 600px;  /* your desired height for this slide */
+  background: url(/img/your-img.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.carousel-inner > .item {
+  height: 400px;
+}

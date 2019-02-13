@@ -1,0 +1,32 @@
+<h1>Events#index</h1>
+<p>Find me in app/views/events/index.html.erb</p>
+<div class="text-center">
+  <h1>Coucou moussaillons</h1>
+  <h4 >ici tu as tout les Events</h4>
+</div>
+<hr>
+
+<div class="text-center">
+  <% @event.each_with_index do |event|%>
+
+  <h1>    
+    <%= event.title %>
+  </h1>
+  <p>
+    <%= event.location %>
+  </p>
+  <p>
+    <%= event.price %>
+  </p>
+
+  <p>
+    <%= event.start_date %>
+  </p>
+  <p>
+    <%= event.description %>
+  </p>
+  <hr>
+
+
+  <%end%>
+</div>
