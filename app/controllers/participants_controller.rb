@@ -1,22 +1,56 @@
 class ParticipantsController < ApplicationController
   before_action :authenticate_user!, :only => [:new]
 
-
   def index
   end
 
-  def create
-  end
-
   def new
-    @event = Event.find(params[:event_id])
+    @event = Event.new
+  end
+  
+  def create
+    # Amount in cents
+ 
+    
+    @amount = 500
+  
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
+  
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => @amount,
+      :description => 'Rails Stripe customer',
+      :currency    => 'usd'
+    )
+
+      @attendance = Attendance.new(stripe_customer_id: customer.id, event_id: params[:event_id] , attendant_id: current_user.id)
+      puts "="*90
+      puts params[:event_id]
+      puts current_user.id
+      puts "="*90
+
+      if charge.save
+        if @attendance.save
+          flash[:success]="bien joué ma couille"
+          redirect_to root_path
+          return
+        else
+          flash[:error]="t un mauvais jack"
+        end
+      end
+
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to root_path
   end
 
   def edit
   end
 
   def show
-
   end
 
   def update
@@ -24,6 +58,4 @@ class ParticipantsController < ApplicationController
 
   def destroy
   end
-
-
 end
