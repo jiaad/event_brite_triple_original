@@ -1,2 +1,31 @@
 <h1>Participants#index</h1>
 <p>Find me in app/views/participants/index.html.erb</p>
+
+
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">First_name</th>
+      <th scope="col">last_name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Des</Th>
+      <th scope="col">Stripe</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @event.each_with_index do |part| %>
+    <tr>
+      <th scope="row">1</th>
+      <td><%= part.attendant.first_name %></td>
+      <td><%= part.attendant.last_name %></td>
+      <td><%= part.attendant.email %></td>
+      <%= part.attendant.description %>
+      <td><%=part.stripe_customer_id%>
+
+    </tr>
+<% end %>
+  </tbody>
+</table>

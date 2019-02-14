@@ -29,11 +29,30 @@ class EventsController < ApplicationController
 
 
   def edit
+    @event = Event.find(params[:id])
   end
 
   def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to event_path(@event)
+    end
   end
 
   def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to root_path, :success => "Your event has been deleted"
   end
+
+
+  private
+    # Using a private method to encapsulate the permissible parameters is
+    # a good pattern since you'll be able to reuse the same permit
+    # list between create and update. Also, you can specialize this method
+    # with per-user checking of permissible attributes.
+    def event_params
+      params.require(:event).permit(:title, :price, :date_time,:duration,:location )
+    end
+
 end

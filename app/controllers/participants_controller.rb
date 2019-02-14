@@ -2,6 +2,13 @@ class ParticipantsController < ApplicationController
   before_action :authenticate_user!, :only => [:new]
 
   def index
+    @event = Event.find(params[:event_id]).attendances
+    @particip = Attendance.find_by(params[:attendances_id])
+    puts "="*90
+  puts      @particip = Attendance.find_by(params[:attendances_id])
+
+  puts "="*90
+
   end
 
   def new

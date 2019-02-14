@@ -2,28 +2,33 @@
 <p>Find me in app/views/events/show.html.erb</p>
 <div class="text-center">
   <% if current_user == @event.admin%>
-    <%= link_to "op la",admin_index_path%>
+    <%= link_to "op la", event_participants_path(@event.id)%>
   <% end %>
 </div>
 
 
 <div class="text-center">
-  <h1>    
+  <h1> title:   
     <%= @event.title %>
   </h1>
-  <p>
+  <p>duration: <%=@event.duration%></p>
+  <p>location: 
     <%= @event.location %>
   </p>
-  <p>
-    <%= @event.price %>
+  <p> price: 
+    <%= @event.price %><span>€<span>
   </p>
 
-  <p>
+  <p>start_date: 
     <%= @event.start_date %>
   </p>
-  <p>
+  <p>description: 
     <%= @event.description %>
   </p>
-  <%= link_to "rejoindre l'evenement", new_event_participant_path(@event.id)%>
+  <%= link_to "rejoindre l'evenement", new_event_participant_path(@event.id)%><br>
+  <% if current_user == @event.admin%>
+      <%= link_to "Delete", event_path(@event), :confirm => "Are you sure?", :method => :delete %><br>
+      <%= link_to 'Edit', edit_event_path %>
+  <%end%>
   <hr>
 </div>

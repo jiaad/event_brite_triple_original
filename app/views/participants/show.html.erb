@@ -1,2 +1,7 @@
 <h1>Participants#show</h1>
 <p>Find me in app/views/participants/show.html.erb</p>
+<h1>POTO</h1>
+<% @particip.each do |part| %>
+  <%= part.event.attendant_id %>
+  <%= part.event.user.first_name %>
+<% end %>
