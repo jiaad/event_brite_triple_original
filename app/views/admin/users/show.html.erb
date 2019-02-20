@@ -1,5 +1,6 @@
-
-<div class=" container text-center">
+<h1>Admin::Users#show</h1>
+<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="text-center">
   <h4>Les infos de moussaillons : <%= @user.first_name %> <%= @user.last_name  %></h4>
 
   <p>email:<mark> <%= @user.email %></mark></p>
@@ -7,8 +8,5 @@
   
   <code><span>last_name: </span><%= @user.last_name%></code>	<br>
   <code><span>description: </span><%= @user.description%></code>	<br>
-    <% if @user.is_admin %>
-    <h1 class="alert alert-success col-md-12 ">i am modo madafaka</h1>
-  <% end %>
-  
+
 </div>

@@ -1,16 +1,19 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :destroy]
+  before_action :user_admin_permisssion, :only =>[:edit, :update]
+
 
   def index
-    @event = Event.all
+    @event = Event.all.where(admin_validation:true)
   end
   def new
     @event = Event.new
   end
 
   def create
-    @event = Event.new(start_date: params[:start_date] , duration: params[:duration]  , title: params[:title]  , description: params[:description] , price:params[:price]  , location: params[:location] , admin: current_user)
+    @event = Event.new(start_date: params[:start_date] , duration: params[:duration]  , title: params[:title]  , description: params[:description] , price:params[:price]  , location: params[:location] , admin: current_user, admin_validation:false)
     if @event.save
+      flash[:success] = "Event Created"
       redirect_to '/'
     else
       puts "="*90
@@ -48,7 +51,7 @@ class EventsController < ApplicationController
     # list between create and update. Also, you can specialize this method
     # with per-user checking of permissible attributes.
     def event_params
-      params.require(:event).permit(:title, :price, :date_time,:duration,:location )
+      params.require(:event).permit(:title, :price, :date_time,:duration,:location, :description )
     end
 
 end

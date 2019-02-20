@@ -13,4 +13,11 @@ class Event < ApplicationRecord
     validates :description , presence:true, length:{minimum: 5}
     validates :price, presence: true
     validates :location, presence:true
+    
+
+    def admin_approval
+        if current_user.is_admin != true
+           
+        end
+    end
 end

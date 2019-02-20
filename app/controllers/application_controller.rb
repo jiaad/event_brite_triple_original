@@ -13,9 +13,17 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       super
     else
-      redirect_to new_user_registration_path, :notice => "connecte toi pour rejoindre l'évent"
+      flash[:notice]= "connecte toi pour rejoindre l'évent"
+      redirect_to new_user_registration_path 
       ## if you want render 404 page
       ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+    end
+  end
+  def user_admin_permisssion
+    @event = Event.find(params[:id])
+    if current_user.id != @event.admin_id
+      flash[:danger]= "degage escroc"
+      redirect_to root_path
     end
   end
 
